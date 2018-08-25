@@ -2,6 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 
+import styles from "./styles";
+
+import List from "./List";
+import Deck from "./Deck";
+
 export default class App extends React.Component {
   render() {
     return (
@@ -14,17 +19,17 @@ class HomeView extends React.Component {
   render(){
     return(
       <View style={styles.container}>
-        <Text>Open up App.js to start </Text>
+        <List />
       </View>
     )
   }
 }
 
-class Other extends React.Component {
+class NewDeck extends React.Component {
   render(){
     return(
       <View style={styles.container}>
-        <Text>Open up App.js to start </Text>
+        <Text>New deck</Text>
       </View>
     )
   }
@@ -32,11 +37,11 @@ class Other extends React.Component {
 
 
 const TabNav = createBottomTabNavigator({
-  Home: {
+  "Decks": {
     screen: HomeView
     },
-  Other: {
-    screen: Other
+  "New Deck": {
+    screen: NewDeck
     }
   },
   {
@@ -49,13 +54,3 @@ const TabNav = createBottomTabNavigator({
   }
 })
 
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
