@@ -34,6 +34,14 @@ export default class List extends React.Component {
       }
     ]
   }
+  renderItem = ({item}) => {
+    const keys = Object.keys(item);
+    const deckName = keys[0];
+    return (
+    <TouchableOpacity>
+      <Deck deckName={deckName} {...item} /> 
+    </TouchableOpacity>
+  )}
   
   render(){
     return(
@@ -43,16 +51,10 @@ export default class List extends React.Component {
         ItemSeparatorComponent = { () => (
           <Separator />
         )}
-        renderItem={ ({item}) => (
-          <TouchableOpacity>
-            <Deck /> 
-          </TouchableOpacity>
-        )}
+        renderItem={this.renderItem}
         keyExtractor ={ (item, index) => {
           let keys = Object.keys(item);
-            for(let key of keys){
-              return key;
-            }
+          return keys[0];
           }}
          />
       </View>
