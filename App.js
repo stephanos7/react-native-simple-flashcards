@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
+import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
 import styles from "./styles";
 
 import List from "./List";
-import Deck from "./Deck";
+import NewDeckView from "./NewDeckView";
+import SecondStepView from "./SecondStepView";
 
 export default class App extends React.Component {
   render() {
@@ -25,24 +26,20 @@ class HomeView extends React.Component {
   }
 }
 
-class NewDeck extends React.Component {
-  render(){
-    return(
-      <View style={styles.container}>
-        <View style={styles.form}>
-          <Text style={styles.question}>What's the deck's title?</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder={"New Deck Titlee"}
-            placeholderTextColor={"lightgrey"}
-            />
-            <Button style={styles.button} title={"Submit"}/>
-        </View>
-      </View>
-    )
+const NewDeckNavigation = createStackNavigator({
+  firstStep: {
+    screen: NewDeckView,
+    navigationOptions: () => ({
+      headerTitle: "Add Title"
+      })
+  },
+  secondStep: {
+    screen: SecondStepView,
+    navigationOptions: () => ({
+      headerTitle: "Add Questions"
+      })
   }
-}
-
+})
 
 const TabNav = createBottomTabNavigator({
   Decks: {
@@ -52,7 +49,7 @@ const TabNav = createBottomTabNavigator({
       })
     },
   New: {
-    screen: NewDeck,
+    screen: NewDeckNavigation,
     navigationOptions: () => ({
       title: "Create New"
       })
@@ -67,4 +64,6 @@ const TabNav = createBottomTabNavigator({
     }
   }
 })
+
+
 
