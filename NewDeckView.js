@@ -19,7 +19,7 @@ export default class NewDeckView extends React.Component {
       question:question,
       answer:answer 
     }
-    this.state.entry.questions.push(set);
+    this.setState( prevState => ({questions : prevState.entry.questions.push(set)}))
     // alert(JSON.stringify(this.state.entry));
   }
 
@@ -71,6 +71,13 @@ export default class NewDeckView extends React.Component {
               title={"Submit"}
               onPress={ step === "first" ?  () => this.props.navigation.navigate("secondStep") : this.submit }
             />
+            { this.state.entry.questions.length > 0
+            && 
+            <Button 
+              title={"Finish"}
+              onPress={ step === "first" ?  () => this.props.navigation.navigate("secondStep") : this.submit }
+            />
+            }
         </View>
       </View>
     )
