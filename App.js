@@ -11,7 +11,7 @@ export default class App extends React.Component {
   render() {
     return (
         <TabNav />
-    );
+    )
   }
 }
 
@@ -37,11 +37,17 @@ class NewDeck extends React.Component {
 
 
 const TabNav = createBottomTabNavigator({
-  "Decks": {
-    screen: HomeView
+  Decks: {
+    screen: HomeView,
+    navigationOptions: () => ({
+      headerTitle: "My Decks"
+      })
     },
-  "New Deck": {
-    screen: NewDeck
+  New: {
+    screen: NewDeck,
+    navigationOptions: () => ({
+      title: "Create New"
+      })
     }
   },
   {

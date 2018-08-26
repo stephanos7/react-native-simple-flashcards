@@ -6,8 +6,8 @@ import styles from "./styles";
 export default class Deck extends React.Component {
   render(){
     return(
-      <View>
-        <Text style={styles.deck}>Deck</Text>
+      <View style={styles.deck}>
+        <Text>Deck</Text>
       </View>
     )
   }

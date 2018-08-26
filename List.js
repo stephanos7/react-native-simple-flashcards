@@ -45,7 +45,7 @@ export default class List extends React.Component {
         )}
         renderItem={ ({item}) => (
           <TouchableOpacity>
-            <Deck />
+            <Deck /> 
           </TouchableOpacity>
         )}
          />

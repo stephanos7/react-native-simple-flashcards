@@ -4,18 +4,21 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   deck:{
-    width:100, 
-    height:100,
-    backgroundColor: "grey",
-    color: "#fff"
+    display: "flex",
+    height:75,
+    backgroundColor: "lightgrey",
+    justifyContent: "center",
+    alignItems: "center"
   },
   separator: {
-    height: 20,
-    backgroundColor: "red"
+    width: 60,
+    height: 6,
+    marginTop: 7,
+    marginBottom: 7,
+    backgroundColor: "lightcoral",
+    alignSelf: "center"
   },
   card:{
     flex:1
