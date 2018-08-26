@@ -6,7 +6,7 @@ import {Separator} from "./Separator";
 
 export default class List extends React.Component {
   state = {
-    tests: [{id:1},{id:2},{id:3},{id:4}],
+    tests: [{react:{id:1}},{redux:{id:2}},{api:{id:3}},{rest:{id:4}}],
     items: [
       {
         React: {
@@ -48,6 +48,12 @@ export default class List extends React.Component {
             <Deck /> 
           </TouchableOpacity>
         )}
+        keyExtractor ={ (item, index) => {
+          let keys = Object.keys(item);
+            for(let key of keys){
+              return key;
+            }
+          }}
          />
       </View>
     )
