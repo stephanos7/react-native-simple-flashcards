@@ -14,9 +14,20 @@ export default class NewDeckView extends React.Component {
     }
   }
 
-  submit = () => {
-    const key = this.state.title;
-    const entry = {name:"hello"}
+  composeEntry = (question, answer) => {
+    const set = { 
+      question:question,
+      answer:answer 
+    }
+    this.state.entry.questions.push(set);
+    // alert(JSON.stringify(this.state.entry));
+  }
+
+  submit = async () => {
+    const key = this.state.title
+    const {questionInput, answerInput} = this.state;
+    await this.composeEntry(questionInput, answerInput);
+    const entry = this.state.entry
     operation(key, entry);
   }
 
@@ -54,10 +65,11 @@ export default class NewDeckView extends React.Component {
               onChangeText={ (text) => this.setState({title:text}) }
               value={this.state.title}
               />
+              <Text>{JSON.stringify(this.state.title)}</Text>
             </View>}
             <Button 
               title={"Submit"}
-              onPress={() => this.props.navigation.navigate("secondStep")}
+              onPress={ step === "first" ?  () => this.props.navigation.navigate("secondStep") : this.submit }
             />
         </View>
       </View>
