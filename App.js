@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 
 import styles from "./styles";
@@ -29,7 +29,15 @@ class NewDeck extends React.Component {
   render(){
     return(
       <View style={styles.container}>
-        <Text>New deck</Text>
+        <View style={styles.form}>
+          <Text style={styles.question}>What's the deck's title?</Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder={"New Deck Titlee"}
+            placeholderTextColor={"lightgrey"}
+            />
+            <Button style={styles.button} title={"Submit"}/>
+        </View>
       </View>
     )
   }

@@ -22,5 +22,22 @@ export default StyleSheet.create({
   },
   card:{
     flex:1
+  },
+  form: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "lightcoral"
+  },
+  question: {
+    fontSize: 32,
+    marginBottom: 20,
+  },
+  textInput: {
+    height: 40,
+    borderColor: "#fff",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 8,
   }
 });

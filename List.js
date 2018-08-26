@@ -7,7 +7,7 @@ import {Separator} from "./Separator";
 export default class List extends React.Component {
   state = {
     tests: [{react:{id:1}},{redux:{id:2}},{api:{id:3}},{rest:{id:4}}],
-    items: [
+    rawItems: [
       {
         React: {
           title: 'React',
@@ -32,31 +32,45 @@ export default class List extends React.Component {
           ]
         }
       }
-    ]
+    ],
+    items: null
   }
+
+  getArrayOfData = (data) => {
+    let arrayOfData = [];
+    for(key in data){
+      arrayOfData.push(data[key]);
+    }
+    return arrayOfData;
+  }
+
   renderItem = ({item}) => {
-    const keys = Object.keys(item);
-    const deckName = keys[0];
     return (
     <TouchableOpacity>
-      <Deck deckName={deckName} {...item} /> 
+      <Deck {...item} /> 
     </TouchableOpacity>
   )}
+
+  componentDidMount() {
+    const items = this.getArrayOfData(this.state.rawItems[0]);
+    this.setState({items});
+  }
   
   render(){
     return(
       <View>
         <FlatList
-        data={this.state.tests}
+        data={this.state.items}
         ItemSeparatorComponent = { () => (
           <Separator />
         )}
         renderItem={this.renderItem}
-        keyExtractor ={ (item, index) => {
-          let keys = Object.keys(item);
-          return keys[0];
-          }}
+        // keyExtractor ={ (item, index) => {
+        //   let keys = Object.keys(item);
+        //   return keys[0];
+        //   }}
          />
+      <Text>{JSON.stringify(this.state.items)}</Text>
       </View>
     )
   }
