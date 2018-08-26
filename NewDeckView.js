@@ -24,11 +24,12 @@ export default class NewDeckView extends React.Component {
   }
 
   submit = async () => {
-    const key = this.state.title
+    const title = this.state.title
     const {questionInput, answerInput} = this.state;
     await this.composeEntry(questionInput, answerInput);
     const entry = this.state.entry
-    operation(key, entry);
+    console.log("the key is : ", title)
+    operation(title, entry);
   }
 
   finish = () => {
@@ -41,6 +42,12 @@ export default class NewDeckView extends React.Component {
       { cancelable: false }
     )
   }
+  componentWillMount() {
+    if(this.props.navigation.state.routeName === "secondStep"){
+      const title = this.props.navigation.state.params.title
+      this.setState({title})
+    }
+  }
 
   render(){
     const {instructions, step} = this.props
@@ -48,7 +55,7 @@ export default class NewDeckView extends React.Component {
       <View style={styles.container}>
         <View style={styles.form}>
           <Text style={styles.question}>{instructions}</Text>
-            { step === "second" 
+            { this.props.navigation.state.routeName === "secondStep" 
             ?
             <View>
               <TextInput
@@ -56,15 +63,16 @@ export default class NewDeckView extends React.Component {
               placeholder={"add question"}
               placeholderTextColor={"white"}
               onChangeText={ (text) => this.setState({questionInput:text}) }
-              value={this.state.title}
+              value={this.state.questionInput}
               /> 
               <TextInput
               style={styles.textInput}
               placeholder={"add answer"}
               placeholderTextColor={"white"}
               onChangeText={ (text) => this.setState({answerInput:text}) }
-              value={this.state.title}
+              value={this.state.answerInput}
               />
+              <Text>{JSON.stringify(this.state)}</Text>
             </View>
             :
             <View>
@@ -75,11 +83,10 @@ export default class NewDeckView extends React.Component {
               onChangeText={ (text) => this.setState({title:text}) }
               value={this.state.title}
               />
-              <Text>{JSON.stringify(this.state.title)}</Text>
             </View>}
             <Button 
               title={"Submit"}
-              onPress={ step === "first" ?  () => this.props.navigation.navigate("secondStep") : this.submit }
+              onPress={ this.props.navigation.state.routeName === "firstStep" ?  () => this.props.navigation.navigate("secondStep", {title:this.state.title}) : this.submit }
             />
             { this.state.entry.questions.length > 0
             && 

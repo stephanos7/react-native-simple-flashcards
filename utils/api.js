@@ -5,11 +5,21 @@ export const submitEntry =  (key, entry) => {
 
 }
 
+const storageKey = "flashcardsDecks"
+
 export const operation = (key, entry) => {
-  AsyncStorage.setItem('key', JSON.stringify(entry), () => {
-      AsyncStorage.getItem('key', (err, result) => {
+  AsyncStorage.mergeItem(storageKey, JSON.stringify({[key]:entry}), () => {
+      AsyncStorage.getItem(storageKey, (err, result) => {
         console.log(result);
       });
     });
 }
+
+// export const operation = (key, entry) => {
+//   AsyncStorage.mergeItem('key', JSON.stringify(entry), () => {
+//       AsyncStorage.getItem('key', (err, result) => {
+//         console.log(result);
+//       });
+//     });
+// }
 

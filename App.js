@@ -9,6 +9,32 @@ import NewDeckView from "./NewDeckView";
 import SecondStepView from "./SecondStepView";
 
 export default class App extends React.Component {
+  state = {
+    title: null,
+    questionInput: null,
+    answerInput: null,
+    entry: {
+    questions:[]
+    }
+  }
+
+  composeEntry = (question, answer) => {
+    const set = { 
+      question:question,
+      answer:answer 
+    }
+    this.setState( prevState => ({questions : prevState.entry.questions.push(set)}))
+  }
+
+  submit = async () => {
+    const title = this.state.title
+    const {questionInput, answerInput} = this.state;
+    await this.composeEntry(questionInput, answerInput);
+    const entry = this.state.entry
+    console.log("the key is : ", title)
+    operation(title, entry);
+  }
+
   render() {
     return (
         <TabNav />
@@ -30,7 +56,6 @@ const NewDeckNavigation = createStackNavigator({
   firstStep: {
   screen: (props) => (<NewDeckView 
                         {...props} 
-                        step={"first"} 
                         instructions={"add deck title"} />),
     navigationOptions: () => ({
       headerTitle: "Add Title"
@@ -39,7 +64,6 @@ const NewDeckNavigation = createStackNavigator({
   secondStep: {
     screen: (props) => (<NewDeckView
                     {...props}
-                    step={"second"}
                     instructions={"add question & answer"} />),
     navigationOptions: () => ({
       headerTitle: "Add Questions"
