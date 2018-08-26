@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button, Alert } from "react-native";
 
 import styles from "./styles";
 import { operation } from "./utils/api";
@@ -31,6 +31,16 @@ export default class NewDeckView extends React.Component {
     operation(key, entry);
   }
 
+  finish = () => {
+    Alert.alert(
+      'Well done!',
+      'Great your work has been saved!',
+      [    
+        {text: 'OK', onPress: () => this.props.navigation.navigate("Decks")},
+      ],
+      { cancelable: false }
+    )
+  }
 
   render(){
     const {instructions, step} = this.props
@@ -75,7 +85,7 @@ export default class NewDeckView extends React.Component {
             && 
             <Button 
               title={"Finish"}
-              onPress={ step === "first" ?  () => this.props.navigation.navigate("secondStep") : this.submit }
+              onPress={this.finish}
             />
             }
         </View>

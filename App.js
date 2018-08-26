@@ -40,8 +40,7 @@ const NewDeckNavigation = createStackNavigator({
     screen: (props) => (<NewDeckView
                     {...props}
                     step={"second"}
-                    instructions={"add question & answer"} />)
-      ,
+                    instructions={"add question & answer"} />),
     navigationOptions: () => ({
       headerTitle: "Add Questions"
       })
