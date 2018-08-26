@@ -28,13 +28,20 @@ class HomeView extends React.Component {
 
 const NewDeckNavigation = createStackNavigator({
   firstStep: {
-    screen: NewDeckView,
+  screen: (props) => (<NewDeckView 
+                        {...props} 
+                        step={"first"} 
+                        instructions={"add deck title"} />),
     navigationOptions: () => ({
       headerTitle: "Add Title"
       })
   },
   secondStep: {
-    screen: SecondStepView,
+    screen: (props) => (<NewDeckView
+                    {...props}
+                    step={"second"}
+                    instructions={"add question & answer"} />)
+      ,
     navigationOptions: () => ({
       headerTitle: "Add Questions"
       })

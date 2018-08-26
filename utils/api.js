@@ -1,10 +1,15 @@
 import { AsyncStorage } from "react-native";
 
-const storageKey = "flashcards:decks";
+export const submitEntry =  (key, entry) => {
+    return AsyncStorage.setItem(key, JSON.stringify({entry}))
 
-export const submitEntry = ({entry, key}) => {
-  return AsyncStorage.mergeItem(storageKey, JSON.stringify({
-    [key]:entry
-  }))
+}
+
+export const operation = (key, entry) => {
+  AsyncStorage.setItem('key', JSON.stringify(entry), () => {
+      AsyncStorage.getItem('key', (err, result) => {
+        console.log(result);
+      });
+    });
 }
 
