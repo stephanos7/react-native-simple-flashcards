@@ -24,11 +24,10 @@ export default class NewDeckView extends React.Component {
   }
 
   submit = async () => {
-    const title = this.state.title
+    const title = this.state.title;
     const {questionInput, answerInput} = this.state;
     await this.composeEntry(questionInput, answerInput);
     const entry = this.state.entry
-    console.log("the key is : ", title)
     operation(title, entry);
   }
 
@@ -72,7 +71,6 @@ export default class NewDeckView extends React.Component {
               onChangeText={ (text) => this.setState({answerInput:text}) }
               value={this.state.answerInput}
               />
-              <Text>{JSON.stringify(this.state)}</Text>
             </View>
             :
             <View>

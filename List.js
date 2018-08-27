@@ -3,45 +3,12 @@ import { FlatList, TouchableOpacity, View, Text } from "react-native";
 
 import Deck from "./Deck";
 import {Separator} from "./Separator";
+import {getAll} from "./utils/api";
 
 export default class List extends React.Component {
   state = {
     tests: [{react:{id:1}},{redux:{id:2}},{api:{id:3}},{rest:{id:4}}],
-    rawItems: [
-      {
-        React: {
-          title: 'React',
-          questions: [
-            {
-              question: 'What is React?',
-              answer: 'A library for managing user interfaces'
-            },
-            {
-              question: 'Where do you make Ajax requests in React?',
-              answer: 'The componentDidMount lifecycle event'
-            }
-          ]
-        },
-        JavaScript: {
-          title: 'JavaScript',
-          questions: [
-            {
-              question: 'What is a closure?',
-              answer: 'The combination of a function and the lexical environment within which that function was declared.'
-            }
-          ]
-        }
-      }
-    ],
     items: null
-  }
-
-  getArrayOfData = (data) => {
-    let arrayOfData = [];
-    for(key in data){
-      arrayOfData.push(data[key]);
-    }
-    return arrayOfData;
   }
 
   renderItem = ({item}) => {
@@ -52,8 +19,15 @@ export default class List extends React.Component {
   )}
 
   componentDidMount() {
-    const items = this.getArrayOfData(this.state.rawItems[0]);
-    this.setState({items});
+    getAll()
+      .then( res => {
+        const items = JSON.parse(res);
+        return items;
+      })
+      .then(items => this.setState({items}))
+      .catch(err => {
+        console.log(err)
+      })
   }
   
   render(){
