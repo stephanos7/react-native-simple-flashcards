@@ -9,7 +9,7 @@ export default class Deck extends React.Component {
 
     return(
       <View style={styles.deck}>
-        <Text>{title}</Text>
+        <Text>{title.item}</Text>
       </View>
     )
   }

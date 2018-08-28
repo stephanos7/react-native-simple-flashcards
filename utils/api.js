@@ -14,3 +14,7 @@ export const operation = (key, entry) => {
 export const getAll = () => {
     return AsyncStorage.getItem(storageKey)
 };
+
+export const removeAll = () => {
+  AsyncStorage.removeItem(storageKey);
+}

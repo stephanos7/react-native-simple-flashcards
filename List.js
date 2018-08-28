@@ -1,20 +1,19 @@
 import React from "react";
-import { FlatList, TouchableOpacity, View, Text } from "react-native";
+import { FlatList, TouchableOpacity, View, Button, Text } from "react-native";
 
 import Deck from "./Deck";
 import {Separator} from "./Separator";
-import {getAll} from "./utils/api";
+import {getAll, removeAll} from "./utils/api";
 
 export default class List extends React.Component {
   state = {
-    tests: [{react:{id:1}},{redux:{id:2}},{api:{id:3}},{rest:{id:4}}],
-    items: null
+
   }
 
-  renderItem = ({item}) => {
+  renderItem = (item) => {
     return (
     <TouchableOpacity>
-      <Deck {...item} /> 
+      <Deck title={item} /> 
     </TouchableOpacity>
   )}
 
@@ -24,27 +23,28 @@ export default class List extends React.Component {
         const items = JSON.parse(res);
         return items;
       })
-      .then(items => this.setState({items}))
+      .then(items => this.setState({...items}))
       .catch(err => {
         console.log(err)
       })
   }
-  
+
   render(){
+    const data = Object.keys(this.state);
+    alert(JSON.stringify(data))
     return(
       <View>
         <FlatList
-        data={this.state.items}
+        data={data}
         ItemSeparatorComponent = { () => (
           <Separator />
         )}
         renderItem={this.renderItem}
-        // keyExtractor ={ (item, index) => {
-        //   let keys = Object.keys(item);
-        //   return keys[0];
-        //   }}
+        keyExtractor ={ (item, index) => item.concat(index)}
          />
-      <Text>{JSON.stringify(this.state.items)}</Text>
+        <Button title="clear" onPress={removeAll} />
+      
+      <Text>{JSON.stringify(this.state, null, '\t')}</Text>
       </View>
     )
   }
