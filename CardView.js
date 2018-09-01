@@ -23,10 +23,13 @@ export default class CardView extends React.Component {
     return(
       <View>
       <Text>{currentQ}/{totalQs}</Text>
-      {
-        questions.map( (q, index) => <Card key={index} questions={questions[index]} />)
-      }
+      <Card {...questions[currentQ-1]} />
+
       </View>
     )
   }
 }
+
+// {
+//   questions.map( (q, index) => <Card key={index} questions={questions[index]} />)
+// }
