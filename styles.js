@@ -21,7 +21,8 @@ export default StyleSheet.create({
     alignSelf: "center"
   },
   card:{
-    flex:1
+    margin: 50,
+    backgroundColor: "white"
   },
   form: {
     flex: 1,
