@@ -17,6 +17,10 @@ export default class Card extends React.Component {
     : alert("u are wrong")
   }
 
+  handleNavigation = () => {
+    this.props.navigateCards();
+  }
+
   render(){
     const {question, answer} = this.props;
     const {answerShown} = this.state;
@@ -29,6 +33,7 @@ export default class Card extends React.Component {
         <View>
           <Button title="Correct" onPress={() => this.checkResult("Correct") } />
           <Button title="Incorrect" onPress={() => this.checkResult("Incorrect") } />
+          <Button title="test nav" onPress={this.handleNavigation} />
         </View>
           }
       </View>

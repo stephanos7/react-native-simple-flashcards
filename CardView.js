@@ -17,13 +17,23 @@ export default class CardView extends React.Component {
     this.setState({currentQ: 1});
   }
 
+  navigateCards = async (props) => {
+    const {questions} = this.state;
+    await this.setState( prevState => ({currentQ: prevState.currentQ+1}),
+() => alert(JSON.stringify(this.state.currentQ))
+  )
+  props.navigation.push("CardView", questions)
+  }
+
   render(){
     const {questions, currentQ, totalQs} = this.state;
 
     return(
       <View>
       <Text>{currentQ}/{totalQs}</Text>
-      <Card {...questions[currentQ-1]} />
+      <Card {...this.props} 
+            {...questions[currentQ-1]}
+            navigateCards={this.navigateCards}  />
 
       </View>
     )
