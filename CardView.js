@@ -1,45 +1,50 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 
 import styles from "./styles";
 import Card from "./Card";
 
 export default class CardView extends React.Component {
   state = {
-    questions: [],
-    totalQs : 0,
     currentQ: 1
   }
-  componentDidMount(){
-    const questions = this.props.navigation.getParam('questions');
-    this.setState({questions});
-    this.setState({totalQs: questions.length});
-    this.setState({currentQ: 1});
+
+  navigateCards = async (totalQuestions) => {
+    this.state.currentQ === totalQuestions
+    ?
+    Alert.alert(
+      'Well done!',
+      'You have completed the deck!',
+      [    
+        {text: 'OK', onPress: () => this.props.navigation.goBack()},
+      ],
+      { cancelable: false }
+    )
+    :
+    await this.setState( 
+      prevState => ({currentQ: prevState.currentQ+1}), 
+        () => alert(JSON.stringify(this.state.currentQ))
+  )
+  this.props.navigation.push("CardView", questions)
   }
 
-  navigateCards = async (props) => {
-    const {questions} = this.state;
-    await this.setState( prevState => ({currentQ: prevState.currentQ+1}),
-() => alert(JSON.stringify(this.state.currentQ))
-  )
-  props.navigation.push("CardView", questions)
-  }
+
 
   render(){
-    const {questions, currentQ, totalQs} = this.state;
+    const questions =  this.props.navigation.getParam('questions');
+    const totalQs = questions.length;
+    const {currentQ} = this.state;
 
     return(
       <View>
+      <Text>STATE:</Text>
+      <Text>{JSON.stringify(this.state)}</Text>
       <Text>{currentQ}/{totalQs}</Text>
       <Card {...this.props} 
             {...questions[currentQ-1]}
+            totalQs={totalQs}
             navigateCards={this.navigateCards}  />
-
       </View>
     )
   }
 }
-
-// {
-//   questions.map( (q, index) => <Card key={index} questions={questions[index]} />)
-// }

@@ -18,7 +18,7 @@ export default class Card extends React.Component {
   }
 
   handleNavigation = () => {
-    this.props.navigateCards();
+    this.props.navigateCards(this.props.totalQs);
   }
 
   render(){
@@ -33,7 +33,7 @@ export default class Card extends React.Component {
         <View>
           <Button title="Correct" onPress={() => this.checkResult("Correct") } />
           <Button title="Incorrect" onPress={() => this.checkResult("Incorrect") } />
-          <Button title="test nav" onPress={this.handleNavigation} />
+          <Button title="test nav" onPress={() => this.handleNavigation(this.props)} />
         </View>
           }
       </View>
