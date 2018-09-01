@@ -12,8 +12,8 @@ export default class List extends React.Component {
 
   renderItem = (item) => {
     return (
-    <TouchableOpacity>
-      <Deck title={item} /> 
+    <TouchableOpacity onPress={ () => this.props.navigation.navigate("CardView", item)}>
+      <Deck {...this.props} title={item} /> 
     </TouchableOpacity>
   )}
 
@@ -31,7 +31,6 @@ export default class List extends React.Component {
 
   render(){
     const data = Object.keys(this.state);
-    alert(JSON.stringify(data))
     return(
       <View>
         <FlatList

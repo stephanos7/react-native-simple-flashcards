@@ -5,6 +5,7 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import styles from "./styles";
 
 import List from "./List";
+import CardView from "./CardView";
 import NewDeckView from "./NewDeckView";
 import SecondStepView from "./SecondStepView";
 
@@ -46,7 +47,7 @@ class HomeView extends React.Component {
   render(){
     return(
       <View style={styles.container}>
-        <List />
+        <List {...this.props}/>
       </View>
     )
   }
@@ -71,9 +72,21 @@ const NewDeckNavigation = createStackNavigator({
   }
 })
 
+const SpecificDeckNavigation = createStackNavigator({
+  HomeView: {
+  screen: (props) => (<HomeView {...props} />)
+},
+  CardView: {
+  screen: (props) => (<CardView {...props} />),
+    navigationOptions: () => ({
+      headerTitle: "Cards in Deck"
+      })
+  }
+});
+
 const TabNav = createBottomTabNavigator({
   Decks: {
-    screen: HomeView,
+    screen: SpecificDeckNavigation,
     navigationOptions: () => ({
       headerTitle: "My Decks"
       })
