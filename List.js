@@ -11,8 +11,9 @@ export default class List extends React.Component {
   }
 
   renderItem = (item) => {
+    const deck = this.state[item.item];
     return (
-    <TouchableOpacity onPress={ () => this.props.navigation.navigate("CardView", item)}>
+    <TouchableOpacity onPress={ () => this.props.navigation.navigate("CardView", {...deck})}>
       <Deck {...this.props} title={item} /> 
     </TouchableOpacity>
   )}

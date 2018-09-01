@@ -78,8 +78,8 @@ const SpecificDeckNavigation = createStackNavigator({
 },
   CardView: {
   screen: (props) => (<CardView {...props} />),
-    navigationOptions: () => ({
-      headerTitle: "Cards in Deck"
+    navigationOptions: (props) => ({
+      headerTitle: "cards in deck"
       })
   }
 });

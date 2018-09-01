@@ -7,7 +7,7 @@ export default class CardView extends React.Component {
   render(){
     return(
       <View>
-        <Text style={styles.card}>view for card</Text>
+        <Text>{JSON.stringify(this.props.navigation.state.params)}</Text>
       </View>
     )
   }
